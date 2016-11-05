@@ -1,11 +1,3 @@
-/**
- * @author Titus Wormer
- * @copyright 2016 Titus Wormer
- * @license MIT
- * @module hast-util-assert
- * @fileoverview Assert `hast` nodes.
- */
-
 'use strict';
 
 /* Dependencies. */

@@ -1,7 +1,5 @@
 'use strict';
 
-/* eslint-env node */
-
 /* Dependencies. */
 var test = require('tape');
 var assert = require('..');
@@ -19,7 +17,7 @@ test('assert(element)', function (t) {
     function () {
       assert({type: 'element', children: []});
     },
-    /^AssertionError: `element` should have a `tagName`: `{ type: 'element', children: \[\] }`$/,
+    /^AssertionError: `element` should have a `tagName`: `{ type: 'element', children: \[] }`$/,
     'should throw if a `element` has no `tagName`'
   );
 
@@ -27,7 +25,7 @@ test('assert(element)', function (t) {
     function () {
       assert({type: 'element', tagName: '', children: []});
     },
-    /^AssertionError: `element.tagName` should not be empty: `{ type: 'element', tagName: '', children: \[\] }`$/,
+    /^AssertionError: `element.tagName` should not be empty: `{ type: 'element', tagName: '', children: \[] }`$/,
     'should throw if a `element` has an empty `tagName`'
   );
 

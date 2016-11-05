@@ -1,7 +1,5 @@
 'use strict';
 
-/* eslint-env node */
-
 /* Dependencies. */
 var test = require('tape');
 var assert = require('..');
@@ -19,7 +17,7 @@ test('assert(root)', function (t) {
     function () {
       assert({type: 'root', children: [{type: 'root', children: []}]});
     },
-    /^AssertionError: `root` should not have a parent: `{ type: 'root', children: \[\] }` in `{ type: 'root', children: \[ { type: 'root', children: \[\] } \] }`$/,
+    /^AssertionError: `root` should not have a parent: `{ type: 'root', children: \[] }` in `{ type: 'root', children: \[ { type: 'root', children: \[] } ] }`$/,
     'should throw if a `root` has a parent'
   );
 

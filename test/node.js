@@ -1,7 +1,5 @@
 'use strict';
 
-/* eslint-env node */
-
 /* Dependencies. */
 var test = require('tape');
 var assert = require('..');

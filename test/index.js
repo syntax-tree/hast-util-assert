@@ -1,6 +1,6 @@
 'use strict';
 
-/* eslint-env node */
+/* eslint-disable import/no-unassigned-import */
 
 /* Dependencies. */
 

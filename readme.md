@@ -1,12 +1,10 @@
 # hast-util-assert [![Build Status][travis-badge]][travis] [![Coverage Status][codecov-badge]][codecov]
 
-<!--lint disable heading-increment no-duplicate-headings-->
-
 Assert [HAST][] nodes.
 
 ## Installation
 
-[npm][npm-install]:
+[npm][]:
 
 ```bash
 npm install hast-util-assert
@@ -52,7 +50,7 @@ methods from [`unist-util-assert`][unist-util-assert] are also included.
 
 [codecov]: https://codecov.io/github/wooorm/hast-util-assert
 
-[npm-install]: https://docs.npmjs.com/cli/install
+[npm]: https://docs.npmjs.com/cli/install
 
 [license]: LICENSE
 

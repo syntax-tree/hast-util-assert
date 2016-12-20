@@ -42,13 +42,13 @@ methods from [`unist-util-assert`][unist-util-assert] are also included.
 
 <!-- Definitions -->
 
-[travis-badge]: https://img.shields.io/travis/wooorm/hast-util-assert.svg
+[travis-badge]: https://img.shields.io/travis/syntax-tree/hast-util-assert.svg
 
-[travis]: https://travis-ci.org/wooorm/hast-util-assert
+[travis]: https://travis-ci.org/syntax-tree/hast-util-assert
 
-[codecov-badge]: https://img.shields.io/codecov/c/github/wooorm/hast-util-assert.svg
+[codecov-badge]: https://img.shields.io/codecov/c/github/syntax-tree/hast-util-assert.svg
 
-[codecov]: https://codecov.io/github/wooorm/hast-util-assert
+[codecov]: https://codecov.io/github/syntax-tree/hast-util-assert
 
 [npm]: https://docs.npmjs.com/cli/install
 
@@ -56,6 +56,6 @@ methods from [`unist-util-assert`][unist-util-assert] are also included.
 
 [author]: http://wooorm.com
 
-[hast]: https://github.com/wooorm/hast
+[hast]: https://github.com/syntax-tree/hast
 
-[unist-util-assert]: https://github.com/wooorm/unist-util-assert
+[unist-util-assert]: https://github.com/syntax-tree/unist-util-assert

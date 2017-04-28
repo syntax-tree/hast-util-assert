@@ -10,7 +10,8 @@ var unist = require('unist-util-assert');
 var hast = zwitch('type');
 
 /* Expose. */
-module.exports = exports = unist.wrap(hast);
+exports = unist.wrap(hast);
+module.exports = exports;
 
 exports.parent = unist.wrap(parent);
 exports.text = unist.text;
@@ -19,7 +20,8 @@ exports.wrap = unist.wrap;
 exports.all = mapz(exports, {key: 'children', indices: false});
 
 /* Core interface. */
-hast.invalid = hast.unknown = unknown;
+hast.invalid = unknown;
+hast.unknown = unknown;
 
 /* Per-type handling. */
 hast.handlers = {

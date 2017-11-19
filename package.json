@@ -9,7 +9,7 @@
     "util",
     "utility"
   ],
-  "repository": "https://github.com/syntax-tree/hast-util-assert",
+  "repository": "syntax-tree/hast-util-assert",
   "bugs": "https://github.com/syntax-tree/hast-util-assert/issues",
   "author": "Titus Wormer <tituswormer@gmail.com> (http://wooorm.com)",
   "contributors": [

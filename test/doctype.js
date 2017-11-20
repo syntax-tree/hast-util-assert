@@ -9,7 +9,7 @@ test('assert(doctype)', function (t) {
     function () {
       assert({type: 'doctype'});
     },
-    /^AssertionError: `doctype` should have a `name`: `{ type: 'doctype' }`$/,
+    /`doctype` should have a `name`: `{ type: 'doctype' }`$/,
     'should throw if a `doctype` doesn’t have a name'
   );
 
@@ -31,7 +31,7 @@ test('assert(doctype)', function (t) {
     function () {
       assert({type: 'doctype', name: 'html', public: true});
     },
-    /^AssertionError: `doctype.public` should be `string`: `{ type: 'doctype', name: 'html', public: true }`$/,
+    /`doctype.public` should be `string`: `{ type: 'doctype', name: 'html', public: true }`$/,
     'should throw if a `public` isn’t string'
   );
 
@@ -39,7 +39,7 @@ test('assert(doctype)', function (t) {
     function () {
       assert({type: 'doctype', name: 'html', system: false});
     },
-    /^AssertionError: `doctype.system` should be `string`: `{ type: 'doctype', name: 'html', system: false }`$/,
+    /`doctype.system` should be `string`: `{ type: 'doctype', name: 'html', system: false }`$/,
     'should throw if a `system` isn’t string'
   );
 

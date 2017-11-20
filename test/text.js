@@ -9,7 +9,7 @@ test('assert(text)', function (t) {
     function () {
       assert({type: 'text'});
     },
-    /^AssertionError: text should have `value`: `{ type: 'text' }`$/,
+    /text should have `value`: `{ type: 'text' }`$/,
     'should throw if a `text` doesn’t have a value'
   );
 

@@ -9,7 +9,7 @@ test('assert(comment)', function (t) {
     function () {
       assert({type: 'comment'});
     },
-    /^AssertionError: text should have `value`: `{ type: 'comment' }`$/,
+    /text should have `value`: `{ type: 'comment' }`$/,
     'should throw if a `comment` doesn’t have a value'
   );
 

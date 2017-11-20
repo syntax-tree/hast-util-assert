@@ -9,7 +9,7 @@ test('assert(root)', function (t) {
     function () {
       assert({type: 'root'});
     },
-    /^AssertionError: parent should have `children`: `{ type: 'root' }`$/,
+    /parent should have `children`: `{ type: 'root' }`$/,
     'should throw if a `root` is not a parent'
   );
 
@@ -17,7 +17,7 @@ test('assert(root)', function (t) {
     function () {
       assert({type: 'root', children: [{type: 'root', children: []}]});
     },
-    /^AssertionError: `root` should not have a parent: `{ type: 'root', children: \[] }` in `{ type: 'root', children: \[ { type: 'root', children: \[] } ] }`$/,
+    /`root` should not have a parent: `{ type: 'root', children: \[] }` in `{ type: 'root', children: \[ { type: 'root', children: \[] } ] }`$/,
     'should throw if a `root` has a parent'
   );
 

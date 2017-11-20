@@ -1,6 +1,5 @@
 'use strict';
 
-/* Dependencies. */
 var assert = require('assert');
 var zwitch = require('zwitch');
 var mapz = require('mapz');
@@ -9,7 +8,6 @@ var unist = require('unist-util-assert');
 /* Construct. */
 var hast = zwitch('type');
 
-/* Expose. */
 exports = unist.wrap(hast);
 module.exports = exports;
 

@@ -1,10 +1,8 @@
 'use strict';
 
-/* Dependencies. */
 var test = require('tape');
 var assert = require('..');
 
-/* Tests. */
 test('node', function (t) {
   t.throws(
     function () {

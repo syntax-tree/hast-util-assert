@@ -2,9 +2,6 @@
 
 /* eslint-disable import/no-unassigned-import */
 
-/* Dependencies. */
-
-/* Tests. */
 require('./node');
 require('./children');
 require('./root');

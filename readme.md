@@ -13,16 +13,16 @@ npm install hast-util-assert
 ## Usage
 
 ```javascript
-var assert = require('hast-util-assert');
+var assert = require('hast-util-assert')
 
-assert({type: 'root', children: []});
-assert({type: 'element', tagName: 'a', properties: {}, children: []});
+assert({type: 'root', children: []})
+assert({type: 'element', tagName: 'a', properties: {}, children: []})
 // All OK.
 
-assert({children: []});
+assert({children: []})
 // AssertionError: node should have a type: `{ children: [] }`
 
-assert({type: 'element', properties: {}, children: []});
+assert({type: 'element', properties: {}, children: []})
 // AssertionError: `element` should have a `tagName`: `{ type: 'element', properties: {}, children: [] }`
 ```
 

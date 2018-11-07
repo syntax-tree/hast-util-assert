@@ -42,27 +42,35 @@ function parent(node) {
 function root(node, ancestor) {
   parent(node)
 
-  assert.equal(ancestor, undefined, '`root` should not have a parent')
+  assert.strictEqual(ancestor, undefined, '`root` should not have a parent')
 }
 
 function element(node) {
   parent(node)
 
-  assert.equal(
+  assert.strictEqual(
     typeof node.tagName,
     'string',
     '`element` should have a `tagName`'
   )
-  assert.notEqual(node.tagName, '', '`element.tagName` should not be empty')
+  assert.notStrictEqual(
+    node.tagName,
+    '',
+    '`element.tagName` should not be empty'
+  )
 }
 
 function doctype(node) {
   unist.void(node)
 
-  assert.equal(typeof node.name, 'string', '`doctype` should have a `name`')
+  assert.strictEqual(
+    typeof node.name,
+    'string',
+    '`doctype` should have a `name`'
+  )
 
   if (node.public != null) {
-    assert.equal(
+    assert.strictEqual(
       typeof node.public,
       'string',
       '`doctype.public` should be `string`'
@@ -70,7 +78,7 @@ function doctype(node) {
   }
 
   if (node.system != null) {
-    assert.equal(
+    assert.strictEqual(
       typeof node.system,
       'string',
       '`doctype.system` should be `string`'

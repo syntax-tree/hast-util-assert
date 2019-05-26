@@ -53,11 +53,6 @@
   "xo": {
     "prettier": true,
     "esnext": false,
-    "rules": {
-      "no-eq-null": "off",
-      "eqeqeq": "off",
-      "guard-for-in": "off"
-    },
     "ignores": [
       "hast-util-assert.js"
     ]

@@ -68,7 +68,7 @@ function doctype(node) {
     '`doctype` should have a `name`'
   )
 
-  if (node.public != null) {
+  if (node.public !== null && node.public !== undefined) {
     assert.strictEqual(
       typeof node.public,
       'string',
@@ -76,7 +76,7 @@ function doctype(node) {
     )
   }
 
-  if (node.system != null) {
+  if (node.system !== null && node.system !== undefined) {
     assert.strictEqual(
       typeof node.system,
       'string',

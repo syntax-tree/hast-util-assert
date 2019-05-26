@@ -5,7 +5,6 @@ var zwitch = require('zwitch')
 var mapz = require('mapz')
 var unist = require('unist-util-assert')
 
-/* Construct. */
 var hast = zwitch('type')
 
 exports = unist.wrap(hast)
@@ -17,11 +16,11 @@ exports.void = unist.void
 exports.wrap = unist.wrap
 exports.all = mapz(exports, {key: 'children', indices: false})
 
-/* Core interface. */
+// Core interface.
 hast.invalid = unknown
 hast.unknown = unknown
 
-/* Per-type handling. */
+// Per-type handling.
 hast.handlers = {
   root: unist.wrap(root),
   element: unist.wrap(element),

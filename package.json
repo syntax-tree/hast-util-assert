@@ -1,6 +1,6 @@
 {
   "name": "hast-util-assert",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Assert HAST nodes",
   "license": "MIT",
   "keywords": [

@@ -45,6 +45,11 @@ well.
 The `assert.parent`, `assert.text`, `assert.void`, and `assert.wrap`
 methods from [`unist-util-assert`][unist-util-assert] are also included.
 
+## Security
+
+`hast-util-assert` does not change the syntax tree so there are no openings for
+[cross-site scripting (XSS)][xss] attacks.
+
 ## Contribute
 
 See [`contributing.md` in `syntax-tree/.github`][contributing] for ways to get
@@ -108,3 +113,5 @@ abide by its terms.
 [child]: https://github.com/syntax-tree/unist#child
 
 [hast]: https://github.com/syntax-tree/hast
+
+[xss]: https://en.wikipedia.org/wiki/Cross-site_scripting

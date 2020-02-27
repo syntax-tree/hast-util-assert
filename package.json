@@ -1,13 +1,17 @@
 {
   "name": "hast-util-assert",
   "version": "1.0.3",
-  "description": "Assert HAST nodes",
+  "description": "hast utility to assert nodes",
   "license": "MIT",
   "keywords": [
-    "assert",
+    "unist",
     "hast",
+    "hast-util",
     "util",
-    "utility"
+    "utility",
+    "assert",
+    "check",
+    "test"
   ],
   "repository": "syntax-tree/hast-util-assert",
   "bugs": "https://github.com/syntax-tree/hast-util-assert/issues",

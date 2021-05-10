@@ -1,5 +1,2 @@
 coverage/
-hast-util-assert.js
-hast-util-assert.min.js
-*.json
 *.md

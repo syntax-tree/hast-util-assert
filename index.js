@@ -1,75 +1,116 @@
-'use strict'
+import nodeAssert from 'assert'
+import {zwitch} from 'zwitch'
+import {mapz} from 'mapz'
+import {
+  assert as unistAssert,
+  parent as unistParent,
+  literal as unistLiteral,
+  wrap,
+  _void
+} from 'unist-util-assert'
 
-var assert = require('assert')
-var zwitch = require('zwitch')
-var mapz = require('mapz')
-var unist = require('unist-util-assert')
-
-var hast = zwitch('type')
-
-exports = unist.wrap(hast)
-module.exports = exports
-
-exports.parent = unist.wrap(parent)
-exports.text = unist.text
-exports.void = unist.void
-exports.wrap = unist.wrap
-exports.all = mapz(exports, {key: 'children', indices: false})
-
-// Core interface.
-hast.invalid = unknown
-hast.unknown = unknown
-
-// Per-type handling.
-hast.handlers = {
-  root: unist.wrap(root),
-  element: unist.wrap(element),
-  doctype: unist.wrap(doctype),
-  comment: exports.text,
-  text: exports.text
+/**
+ * Assert that `node` is a valid hast node.
+ * If `node` is a parent, all children will be asserted too.
+ *
+ * @param {unknown} [node]
+ * @param {Parent} [parent]
+ * @returns {asserts node is Node}
+ */
+export function assert(node, parent) {
+  return wrap(hast)(node, parent)
 }
+
+/**
+ * Assert that `node` is a valid hast parent.
+ *
+ * @param {unknown} [node]
+ * @param {Parent} [parent]
+ * @returns {asserts node is Parent}
+ */
+export function parent(node, parent) {
+  return wrap(assertParent)(node, parent)
+}
+
+/**
+ * Assert that `node` is a valid hast literal.
+ *
+ * @param {unknown} [node]
+ * @param {Parent} [parent]
+ * @returns {asserts node is Literal}
+ */
+export function literal(node, parent) {
+  return wrap(assertLiteral)(node, parent)
+}
+
+export {_void, wrap}
+
+var hast = zwitch('type', {
+  // Core interface.
+  unknown,
+  invalid: unknown,
+
+  // Per-type handling.
+  handlers: {
+    root: wrap(assertRoot),
+    element: wrap(assertElement),
+    doctype: wrap(assertDoctype),
+    comment: literal,
+    text: literal
+  }
+})
+
+var all = mapz(hast, {key: 'children', indices: false})
 
 function unknown(node, ancestor) {
-  unist(node, ancestor)
+  unistAssert(node, ancestor)
 }
 
-function parent(node) {
-  unist.parent(node)
-  exports.all(node)
+function assertParent(node) {
+  unistParent(node)
+  all(node)
 }
 
-function root(node, ancestor) {
-  parent(node)
-
-  assert.strictEqual(ancestor, undefined, '`root` should not have a parent')
+function assertLiteral(node) {
+  unistLiteral(node)
+  nodeAssert.strictEqual(
+    typeof node.value,
+    'string',
+    'literal should have a string `value`'
+  )
 }
 
-function element(node) {
-  parent(node)
+function assertRoot(node, ancestor) {
+  assertParent(node)
+  nodeAssert.strictEqual(ancestor, undefined, '`root` should not have a parent')
+}
 
-  assert.strictEqual(
+function assertElement(node) {
+  assertParent(node)
+
+  nodeAssert.strictEqual(
     typeof node.tagName,
     'string',
     '`element` should have a `tagName`'
   )
-  assert.notStrictEqual(
+  nodeAssert.notStrictEqual(
     node.tagName,
     '',
     '`element.tagName` should not be empty'
   )
 }
 
-function doctype(node) {
-  unist.void(node)
+function assertDoctype(node) {
+  _void(node)
 
-  assert.strictEqual(
+  nodeAssert.strictEqual(
     typeof node.name,
     'string',
     '`doctype` should have a `name`'
   )
 
   if (node.public !== null && node.public !== undefined) {
-    assert.strictEqual(
+    nodeAssert.strictEqual(
       typeof node.public,
       'string',
       '`doctype.public` should be `string`'
@@ -77,7 +118,7 @@ function doctype(node) {
   }
 
   if (node.system !== null && node.system !== undefined) {
-    assert.strictEqual(
+    nodeAssert.strictEqual(
       typeof node.system,
       'string',
       '`doctype.system` should be `string`'

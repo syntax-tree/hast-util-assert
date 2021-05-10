@@ -1,14 +1,12 @@
-'use strict'
-
-var test = require('tape')
-var assert = require('..')
+import test from 'tape'
+import {assert} from '../index.js'
 
 test('assert(text)', function (t) {
   t.throws(
     function () {
       assert({type: 'text'})
     },
-    /text should have `value`: `{ type: 'text' }`$/,
+    /literal should have `value`: `{ type: 'text' }`$/,
     'should throw if a `text` doesn’t have a value'
   )
 

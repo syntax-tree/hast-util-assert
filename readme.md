@@ -49,7 +49,7 @@ Assert that the given `tree` is a valid [**hast**][hast] [*tree*][tree].
 If `tree` is a [*parent*][parent], all [*children*][child] will be asserted as
 well.
 
-The `parent`, `literal`, `_void`, and `_wrap` methods from
+The `parent`, `literal`, `_void`, and `wrap` methods from
 [`unist-util-assert`][unist-util-assert] are also included.
 
 ## Security

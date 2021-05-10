@@ -1,3 +1,12 @@
+/**
+ * @typedef {import('hast').Node} Node
+ * @typedef {import('hast').Parent} Parent
+ * @typedef {import('hast').Literal} Literal
+ * @typedef {import('hast').Root} Root
+ * @typedef {import('hast').Element} Element
+ * @typedef {import('hast').DocType} Doctype
+ */
+
 import nodeAssert from 'assert'
 import {zwitch} from 'zwitch'
 import {mapz} from 'mapz'
@@ -60,17 +69,30 @@ var hast = zwitch('type', {
   }
 })
 
-var all = mapz(hast, {key: 'children', indices: false})
+var all = mapz(hast, {key: 'children'})
 
+/**
+ * @param {unknown} node
+ * @param {Parent} [ancestor]
+ * @returns {asserts node is Node}
+ */
 function unknown(node, ancestor) {
   unistAssert(node, ancestor)
 }
 
+/**
+ * @param {unknown} node
+ * @returns {asserts node is Parent}
+ */
 function assertParent(node) {
   unistParent(node)
   all(node)
 }
 
+/**
+ * @param {unknown} node
+ * @returns {asserts node is Literal}
+ */
 function assertLiteral(node) {
   unistLiteral(node)
   nodeAssert.strictEqual(
@@ -80,11 +102,20 @@ function assertLiteral(node) {
   )
 }
 
+/**
+ * @param {unknown} node
+ * @param {Parent} [ancestor]
+ * @returns {asserts node is Root}
+ */
 function assertRoot(node, ancestor) {
   assertParent(node)
   nodeAssert.strictEqual(ancestor, undefined, '`root` should not have a parent')
 }
 
+/**
+ * @param {unknown} node
+ * @returns {asserts node is Element}
+ */
 function assertElement(node) {
   assertParent(node)
 
@@ -100,6 +131,10 @@ function assertElement(node) {
   )
 }
 
+/**
+ * @param {unknown} node
+ * @returns {asserts node is Doctype}
+ */
 function assertDoctype(node) {
   _void(node)
 

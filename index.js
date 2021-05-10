@@ -63,7 +63,7 @@ var hast = zwitch('type', {
   handlers: {
     root: wrap(assertRoot),
     element: wrap(assertElement),
-    doctype: wrap(assertDoctype),
+    doctype: _void,
     comment: literal,
     text: literal
   }
@@ -129,34 +129,4 @@ function assertElement(node) {
     '',
     '`element.tagName` should not be empty'
   )
-}
-
-/**
- * @param {unknown} node
- * @returns {asserts node is Doctype}
- */
-function assertDoctype(node) {
-  _void(node)
-
-  nodeAssert.strictEqual(
-    typeof node.name,
-    'string',
-    '`doctype` should have a `name`'
-  )
-
-  if (node.public !== null && node.public !== undefined) {
-    nodeAssert.strictEqual(
-      typeof node.public,
-      'string',
-      '`doctype.public` should be `string`'
-    )
-  }
-
-  if (node.system !== null && node.system !== undefined) {
-    nodeAssert.strictEqual(
-      typeof node.system,
-      'string',
-      '`doctype.system` should be `string`'
-    )
-  }
 }

@@ -56,15 +56,22 @@ export {_void, wrap}
 
 const hast = zwitch('type', {
   // Core interface.
+  // @ts-expect-error: hush.
   unknown,
+  // @ts-expect-error: hush.
   invalid: unknown,
 
   // Per-type handling.
   handlers: {
+    // @ts-expect-error: hush.
     root: wrap(assertRoot),
+    // @ts-expect-error: hush.
     element: wrap(assertElement),
+    // @ts-expect-error: hush.
     doctype: _void,
+    // @ts-expect-error: hush.
     comment: literal,
+    // @ts-expect-error: hush.
     text: literal
   }
 })

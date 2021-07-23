@@ -120,11 +120,13 @@ function assertElement(node) {
   assertParent(node)
 
   nodeAssert.strictEqual(
+    // @ts-expect-error: hush.
     typeof node.tagName,
     'string',
     '`element` should have a `tagName`'
   )
   nodeAssert.notStrictEqual(
+    // @ts-expect-error: hush.
     node.tagName,
     '',
     '`element.tagName` should not be empty'

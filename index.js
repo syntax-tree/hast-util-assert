@@ -7,7 +7,7 @@
  * @typedef {import('hast').DocType} Doctype
  */
 
-import nodeAssert from 'assert'
+import nodeAssert from 'node:assert'
 import {zwitch} from 'zwitch'
 import {mapz} from 'mapz'
 import {

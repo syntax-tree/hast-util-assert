@@ -54,7 +54,7 @@ export function literal(node, parent) {
 
 export {_void, wrap}
 
-var hast = zwitch('type', {
+const hast = zwitch('type', {
   // Core interface.
   unknown,
   invalid: unknown,
@@ -69,7 +69,7 @@ var hast = zwitch('type', {
   }
 })
 
-var all = mapz(hast, {key: 'children'})
+const all = mapz(hast, {key: 'children'})
 
 /**
  * @param {unknown} node

@@ -1,9 +1,9 @@
 import test from 'tape'
 import {parent} from '../index.js'
 
-test('parent', function (t) {
+test('parent', (t) => {
   t.throws(
-    function () {
+    () => {
       parent()
     },
     /node should be an object: `undefined`$/,
@@ -11,7 +11,7 @@ test('parent', function (t) {
   )
 
   t.throws(
-    function () {
+    () => {
       parent({type: 'x'})
     },
     /parent should have `children`/,

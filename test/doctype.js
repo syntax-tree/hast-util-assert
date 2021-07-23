@@ -1,8 +1,8 @@
 import test from 'tape'
 import {assert} from '../index.js'
 
-test('assert(doctype)', function (t) {
-  t.doesNotThrow(function () {
+test('assert(doctype)', (t) => {
+  t.doesNotThrow(() => {
     assert({type: 'doctype'})
   }, 'should allow doctypes')
 

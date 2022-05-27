@@ -52,8 +52,6 @@ export function literal(node, parent) {
   return wrap(assertLiteral)(node, parent)
 }
 
-export {_void, wrap}
-
 const hast = zwitch('type', {
   // Core interface.
   // @ts-expect-error: hush.
@@ -139,3 +137,5 @@ function assertElement(node) {
     '`element.tagName` should not be empty'
   )
 }
+
+export {_void, wrap} from 'unist-util-assert'

@@ -1,8 +1,9 @@
-import test from 'tape'
+import nodeAssert from 'node:assert/strict'
+import test from 'node:test'
 import {parent} from '../index.js'
 
-test('parent', (t) => {
-  t.throws(
+test('parent', () => {
+  nodeAssert.throws(
     () => {
       parent()
     },
@@ -10,13 +11,11 @@ test('parent', (t) => {
     'should throw if not given a node'
   )
 
-  t.throws(
+  nodeAssert.throws(
     () => {
       parent({type: 'x'})
     },
     /parent should have `children`/,
     'should throw if not given a parent'
   )
-
-  t.end()
 })

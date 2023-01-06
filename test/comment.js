@@ -1,8 +1,9 @@
-import test from 'tape'
+import nodeAssert from 'node:assert/strict'
+import test from 'node:test'
 import {assert} from '../index.js'
 
-test('assert(comment)', (t) => {
-  t.throws(
+test('assert(comment)', () => {
+  nodeAssert.throws(
     () => {
       assert({type: 'comment'})
     },
@@ -10,9 +11,7 @@ test('assert(comment)', (t) => {
     'should throw if a `comment` doesn’t have a value'
   )
 
-  t.doesNotThrow(() => {
+  nodeAssert.doesNotThrow(() => {
     assert({type: 'comment', value: 'Alpha'})
   }, 'should allow `value`')
-
-  t.end()
 })

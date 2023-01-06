@@ -1,8 +1,9 @@
-import test from 'tape'
+import nodeAssert from 'node:assert/strict'
+import test from 'node:test'
 import {assert} from '../index.js'
 
-test('assert(element)', (t) => {
-  t.throws(
+test('assert(element)', () => {
+  nodeAssert.throws(
     () => {
       assert({type: 'element'})
     },
@@ -10,7 +11,7 @@ test('assert(element)', (t) => {
     'should throw if a `element` is not a parent'
   )
 
-  t.throws(
+  nodeAssert.throws(
     () => {
       assert({type: 'element', children: []})
     },
@@ -18,13 +19,11 @@ test('assert(element)', (t) => {
     'should throw if a `element` has no `tagName`'
   )
 
-  t.throws(
+  nodeAssert.throws(
     () => {
       assert({type: 'element', tagName: '', children: []})
     },
     /`element.tagName` should not be empty: `{ type: 'element', tagName: '', children: \[] }`$/,
     'should throw if a `element` has an empty `tagName`'
   )
-
-  t.end()
 })

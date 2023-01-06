@@ -1,8 +1,9 @@
-import test from 'tape'
+import nodeAssert from 'node:assert/strict'
+import test from 'node:test'
 import {assert} from '../index.js'
 
-test('assert(text)', (t) => {
-  t.throws(
+test('assert(text)', () => {
+  nodeAssert.throws(
     () => {
       assert({type: 'text'})
     },
@@ -10,9 +11,7 @@ test('assert(text)', (t) => {
     'should throw if a `text` doesn’t have a value'
   )
 
-  t.doesNotThrow(() => {
+  nodeAssert.doesNotThrow(() => {
     assert({type: 'text', value: 'Alpha'})
   }, 'should allow `value`')
-
-  t.end()
 })

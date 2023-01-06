@@ -25,34 +25,58 @@ import {
 } from 'unist-util-assert'
 
 /**
- * Assert that `node` is a valid hast node.
- * If `node` is a parent, all children will be asserted too.
+ * Assert that `tree` is a valid hast node.
  *
- * @param {unknown} [node]
+ * If `tree` is a parent, all children will be asserted too.
+ *
+ * Supports unknown hast nodes.
+ *
+ * @param {unknown} [tree]
+ *   Thing to assert.
  * @param {UnistParent | null | undefined} [parent]
- * @returns {asserts node is Node}
+ *   Optional, valid parent.
+ * @returns {asserts tree is Node}
+ *   Nothing.
+ * @throws {AssertionError}
+ *   When `tree` (or its descendants) is not a hast node.
  */
-export function assert(node, parent) {
-  return wrap(hast)(node, parent)
+export function assert(tree, parent) {
+  return wrap(hast)(tree, parent)
 }
 
 /**
- * Assert that `node` is a valid hast parent.
+ * Assert that `tree` is a valid hast parent.
  *
- * @param {unknown} [node]
+ * All children will be asserted too.
+ *
+ * Supports unknown hast nodes.
+ *
+ * @param {unknown} [tree]
+ *   Thing to assert.
  * @param {UnistParent | null | undefined} [parent]
- * @returns {asserts node is Parent}
+ *   Optional, valid parent.
+ * @returns {asserts tree is Parent}
+ *   Nothing.
+ * @throws {AssertionError}
+ *   When `tree` is not a parent or its descendants are not nodes.
  */
-export function parent(node, parent) {
-  return wrap(assertParent)(node, parent)
+export function parent(tree, parent) {
+  return wrap(assertParent)(tree, parent)
 }
 
 /**
  * Assert that `node` is a valid hast literal.
  *
+ * Supports unknown hast nodes.
+ *
  * @param {unknown} [node]
+ *   Thing to assert.
  * @param {UnistParent | null | undefined} [parent]
+ *   Optional, valid parent.
  * @returns {asserts node is Literal}
+ *   Nothing.
+ * @throws {AssertionError}
+ *   When `node` is not a hast literal.
  */
 export function literal(node, parent) {
   return wrap(assertLiteral)(node, parent)
@@ -75,26 +99,51 @@ const hast = zwitch('type', {
 const all = mapz(hast, {key: 'children'})
 
 /**
- * @param {unknown} node
- * @param {UnistParent | null | undefined} [ancestor]
- * @returns {asserts node is Node}
+ * Assert that `node` (which is not a known hast node) is a valid unist node.
+ *
+ * @param {unknown} [node]
+ *   Thing to assert.
+ * @param {UnistParent | null | undefined} [parent]
+ *   Optional, valid parent.
+ * @returns {asserts node is UnistNode}
+ *   Nothing.
+ * @throws {AssertionError}
+ *   When `node` is not a unist node.
  */
-function unknown(node, ancestor) {
-  unistAssert(node, ancestor)
+function unknown(node, parent) {
+  unistAssert(node, parent)
 }
 
 /**
- * @param {unknown} node
- * @returns {asserts node is Parent}
+ * Assert that `tree` is a valid hast parent, with valid children.
+ *
+ * All children will be asserted too.
+ *
+ * Supports unknown hast nodes.
+ *
+ * @param {unknown} [tree]
+ *   Thing to assert.
+ * @returns {asserts tree is Parent}
+ *   Nothing.
+ * @throws {AssertionError}
+ *   When `tree` is not a parent or its descendants are not nodes.
  */
-function assertParent(node) {
-  unistParent(node)
-  all(node)
+function assertParent(tree) {
+  unistParent(tree)
+  all(tree)
 }
 
 /**
- * @param {unknown} node
+ * Assert that `node` is a valid hast literal.
+ *
+ * Supports unknown hast nodes.
+ *
+ * @param {unknown} [node]
+ *   Thing to assert.
  * @returns {asserts node is Literal}
+ *   Nothing.
+ * @throws {AssertionError}
+ *   When `node` is not a hast literal.
  */
 function assertLiteral(node) {
   unistLiteral(node)
@@ -108,31 +157,48 @@ function assertLiteral(node) {
 }
 
 /**
- * @param {unknown} node
- * @param {UnistParent | null | undefined} [ancestor]
- * @returns {asserts node is Root}
+ * Assert that `tree` is a hast root with valid children.
+ *
+ * Supports unknown hast descendants.
+ *
+ * @param {unknown} [tree]
+ *   Thing to assert.
+ * @param {UnistParent | null | undefined} [parent]
+ *   Optional, valid parent.
+ * @returns {asserts tree is Root}
+ *   Nothing.
+ * @throws {AssertionError}
+ *   When `tree` is not a root or its descendants are not valid.
  */
-function assertRoot(node, ancestor) {
-  assertParent(node)
-  nodeAssert.strictEqual(ancestor, undefined, '`root` should not have a parent')
+function assertRoot(tree, parent) {
+  assertParent(tree)
+  nodeAssert.strictEqual(parent, undefined, '`root` should not have a parent')
 }
 
 /**
- * @param {unknown} node
- * @returns {asserts node is Element}
+ * Assert that `tree` is a hast element with valid children.
+ *
+ * Supports unknown hast descendants.
+ *
+ * @param {unknown} [tree]
+ *   Thing to assert.
+ * @returns {asserts tree is Element}
+ *   Nothing.
+ * @throws {AssertionError}
+ *   When `tree` is not an element or its descendants are not valid.
  */
-function assertElement(node) {
-  assertParent(node)
+function assertElement(tree) {
+  assertParent(tree)
 
   nodeAssert.strictEqual(
     // @ts-expect-error: hush.
-    typeof node.tagName,
+    typeof tree.tagName,
     'string',
     '`element` should have a `tagName`'
   )
   nodeAssert.notStrictEqual(
     // @ts-expect-error: hush.
-    node.tagName,
+    tree.tagName,
     '',
     '`element.tagName` should not be empty'
   )

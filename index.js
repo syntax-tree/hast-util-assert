@@ -1,10 +1,16 @@
 /**
- * @typedef {import('hast').Node} Node
- * @typedef {import('hast').Parent} Parent
- * @typedef {import('hast').Literal} Literal
+ * @typedef {import('unist').Node} UnistNode
+ * @typedef {import('unist').Parent} UnistParent
+ * @typedef {import('unist').Literal} UnistLiteral
  * @typedef {import('hast').Root} Root
+ * @typedef {import('hast').Content} Content
  * @typedef {import('hast').Element} Element
- * @typedef {import('hast').DocType} Doctype
+ */
+
+/**
+ * @typedef {Root | Content} Node
+ * @typedef {Extract<Node, UnistParent>} Parent
+ * @typedef {Extract<Node, UnistLiteral>} Literal
  */
 
 import nodeAssert from 'node:assert'
@@ -23,7 +29,7 @@ import {
  * If `node` is a parent, all children will be asserted too.
  *
  * @param {unknown} [node]
- * @param {Parent} [parent]
+ * @param {UnistParent | null | undefined} [parent]
  * @returns {asserts node is Node}
  */
 export function assert(node, parent) {
@@ -34,7 +40,7 @@ export function assert(node, parent) {
  * Assert that `node` is a valid hast parent.
  *
  * @param {unknown} [node]
- * @param {Parent} [parent]
+ * @param {UnistParent | null | undefined} [parent]
  * @returns {asserts node is Parent}
  */
 export function parent(node, parent) {
@@ -45,7 +51,7 @@ export function parent(node, parent) {
  * Assert that `node` is a valid hast literal.
  *
  * @param {unknown} [node]
- * @param {Parent} [parent]
+ * @param {UnistParent | null | undefined} [parent]
  * @returns {asserts node is Literal}
  */
 export function literal(node, parent) {
@@ -54,22 +60,14 @@ export function literal(node, parent) {
 
 const hast = zwitch('type', {
   // Core interface.
-  // @ts-expect-error: hush.
   unknown,
-  // @ts-expect-error: hush.
   invalid: unknown,
-
   // Per-type handling.
   handlers: {
-    // @ts-expect-error: hush.
     root: wrap(assertRoot),
-    // @ts-expect-error: hush.
     element: wrap(assertElement),
-    // @ts-expect-error: hush.
     doctype: _void,
-    // @ts-expect-error: hush.
     comment: literal,
-    // @ts-expect-error: hush.
     text: literal
   }
 })
@@ -78,7 +76,7 @@ const all = mapz(hast, {key: 'children'})
 
 /**
  * @param {unknown} node
- * @param {Parent} [ancestor]
+ * @param {UnistParent | null | undefined} [ancestor]
  * @returns {asserts node is Node}
  */
 function unknown(node, ancestor) {
@@ -101,6 +99,8 @@ function assertParent(node) {
 function assertLiteral(node) {
   unistLiteral(node)
   nodeAssert.strictEqual(
+    // `value` in unist literals is `any`.
+    // type-coverage:ignore-next-line
     typeof node.value,
     'string',
     'literal should have a string `value`'
@@ -109,7 +109,7 @@ function assertLiteral(node) {
 
 /**
  * @param {unknown} node
- * @param {Parent} [ancestor]
+ * @param {UnistParent | null | undefined} [ancestor]
  * @returns {asserts node is Root}
  */
 function assertRoot(node, ancestor) {

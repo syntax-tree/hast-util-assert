@@ -1,6 +1,10 @@
 import {expectType, expectNotType} from 'tsd'
-import {Node, Parent} from 'hast'
+import type {Parent as UnistParent} from 'unist'
+import type {Root, Content} from 'hast'
 import {assert, parent} from './index.js'
+
+type Node = Root | Content
+type Parent = Extract<Node, UnistParent>
 
 const emptyNode = {type: 'doctype'}
 const literalNode = {type: 'text', value: 'a'}

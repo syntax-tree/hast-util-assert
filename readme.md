@@ -17,7 +17,12 @@
 *   [Install](#install)
 *   [Use](#use)
 *   [API](#api)
-    *   [`assert(tree)`](#asserttree)
+    *   [`assert(tree[, parent])`](#asserttree-parent)
+    *   [`parent(tree[, parent])`](#parenttree-parent)
+    *   [`literal(node[, parent])`](#literalnode-parent)
+    *   [`_void(node[, parent])`](#_voidnode-parent)
+    *   [`wrap(fn)`](#wrapfn)
+    *   [`AssertionError`](#assertionerror)
 *   [Types](#types)
 *   [Compatibility](#compatibility)
 *   [Security](#security)
@@ -40,7 +45,7 @@ for any [unist][] node.
 ## Install
 
 This package is [ESM only][esm].
-In Node.js (version 12.20+, 14.14+, 16.0+, or 18.0+), install with [npm][]:
+In Node.js (version 14.14+ and 16.0+), install with [npm][]:
 
 ```sh
 npm install hast-util-assert
@@ -78,17 +83,24 @@ assert({type: 'element', properties: {}, children: []})
 
 ## API
 
-This package exports the identifiers `assert`, `parent`, `literal`, `_void`,
-and `wrap`.
+This package exports the identifiers [`_void`][void], [`assert`][assert],
+[`literal`][literal], [`parent`][parent], and [`wrap`][wrap].
 There is no default export.
 
-### `assert(tree)`
+### `assert(tree[, parent])`
 
-Assert that [`tree`][tree] is a valid [hast][] node.
-If `tree` is a [parent][], all [child][]ren will be asserted as well.
+Assert that `tree` is a valid hast [`Node`][node].
 
-The `parent`, `literal`, `_void`, and `wrap` methods from
-[`unist-util-assert`][unist-util-assert] are also exported.
+If `tree` is a parent, all children will be asserted too.
+
+Supports unknown hast nodes.
+
+###### Parameters
+
+*   `tree` (`unknown`)
+    — thing to assert
+*   `parent` ([`Parent`][parent-node], optional)
+    — optional, valid parent
 
 ###### Returns
 
@@ -96,18 +108,76 @@ Nothing.
 
 ###### Throws
 
-When `node`, or one of its children, is not a valid mdast node.
+When `tree` (or its descendants) is not a hast node
+([`AssertionError`][assertionerror]).
+
+### `parent(tree[, parent])`
+
+Assert that `tree` is a valid hast [`Parent`][parent-node].
+
+All children will be asserted too.
+
+Supports unknown hast nodes.
+
+###### Parameters
+
+*   `tree` (`unknown`)
+    — thing to assert
+*   `parent` ([`Parent`][parent-node], optional)
+    — optional, valid parent
+
+###### Returns
+
+Nothing.
+
+###### Throws
+
+When `tree` is not a parent or its descendants are not nodes
+([`AssertionError`][assertionerror])
+
+### `literal(node[, parent])`
+
+Assert that `node` is a valid hast [`Literal`][literal-node].
+
+Supports unknown hast nodes.
+
+###### Parameters
+
+*   `node` (`unknown`)
+    — thing to assert
+*   `parent` ([`Parent`][parent-node], optional)
+    — optional, valid parent
+
+###### Returns
+
+Nothing.
+
+###### Throws
+
+When `node` is not a hast literal ([`AssertionError`][assertionerror]).
+
+### `_void(node[, parent])`
+
+Re-exported from [`unist-util-assert`][unist-util-assert-void].
+
+### `wrap(fn)`
+
+Re-exported from [`unist-util-assert`][unist-util-assert-wrap].
+
+### `AssertionError`
+
+Re-exported from [`unist-util-assert`][unist-util-assert-assertionerror].
 
 ## Types
 
 This package is fully typed with [TypeScript][].
-It does not export additional types.
+It exports the additional type [`AssertionError`][assertionerror].
 
 ## Compatibility
 
 Projects maintained by the unified collective are compatible with all maintained
 versions of Node.js.
-As of now, that is Node.js 12.20+, 14.14+, 16.0+, and 18.0+.
+As of now, that is Node.js 14.14+ and 16.0+.
 Our projects sometimes work with older versions, but this is not guaranteed.
 
 ## Security
@@ -188,14 +258,32 @@ abide by its terms.
 
 [unist-util-assert]: https://github.com/syntax-tree/unist-util-assert
 
-[tree]: https://github.com/syntax-tree/unist#tree
-
-[parent]: https://github.com/syntax-tree/unist#parent-1
-
-[child]: https://github.com/syntax-tree/unist#child
-
 [unist]: https://github.com/syntax-tree/unist
+
+[node]: https://github.com/syntax-tree/unist#nodes
+
+[parent-node]: https://github.com/syntax-tree/unist#parent-1
+
+[literal-node]: https://github.com/syntax-tree/unist#literal
 
 [hast]: https://github.com/syntax-tree/hast
 
 [xss]: https://en.wikipedia.org/wiki/Cross-site_scripting
+
+[void]: #_voidnode-parent
+
+[assert]: #asserttree-parent
+
+[literal]: #literalnode-parent
+
+[parent]: #parenttree-parent
+
+[wrap]: #wrapfn
+
+[assertionerror]: #assertionerror
+
+[unist-util-assert-void]: https://github.com/syntax-tree/unist-util-assert#_voidnode-parent
+
+[unist-util-assert-wrap]: https://github.com/syntax-tree/unist-util-assert#wrapfn
+
+[unist-util-assert-assertionerror]: https://github.com/syntax-tree/unist-util-assert#assertionerror

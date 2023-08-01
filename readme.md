@@ -45,7 +45,7 @@ for any [unist][] node.
 ## Install
 
 This package is [ESM only][esm].
-In Node.js (version 14.14+ and 16.0+), install with [npm][]:
+In Node.js (version 16+), install with [npm][]:
 
 ```sh
 npm install hast-util-assert
@@ -83,8 +83,11 @@ assert({type: 'element', properties: {}, children: []})
 
 ## API
 
-This package exports the identifiers [`_void`][void], [`assert`][assert],
-[`literal`][literal], [`parent`][parent], and [`wrap`][wrap].
+This package exports the identifiers [`_void`][api-void],
+[`assert`][api-assert],
+[`literal`][api-literal],
+[`parent`][api-parent], and
+[`wrap`][api-wrap].
 There is no default export.
 
 ### `assert(tree[, parent])`
@@ -109,7 +112,7 @@ Nothing.
 ###### Throws
 
 When `tree` (or its descendants) is not a hast node
-([`AssertionError`][assertionerror]).
+([`AssertionError`][api-assertion-error]).
 
 ### `parent(tree[, parent])`
 
@@ -133,7 +136,7 @@ Nothing.
 ###### Throws
 
 When `tree` is not a parent or its descendants are not nodes
-([`AssertionError`][assertionerror])
+([`AssertionError`][api-assertion-error])
 
 ### `literal(node[, parent])`
 
@@ -154,7 +157,7 @@ Nothing.
 
 ###### Throws
 
-When `node` is not a hast literal ([`AssertionError`][assertionerror]).
+When `node` is not a hast literal ([`AssertionError`][api-assertion-error]).
 
 ### `_void(node[, parent])`
 
@@ -166,19 +169,22 @@ Re-exported from [`unist-util-assert`][unist-util-assert-wrap].
 
 ### `AssertionError`
 
-Re-exported from [`unist-util-assert`][unist-util-assert-assertionerror].
+Re-exported from [`unist-util-assert`][unist-util-assert-assertion-error].
 
 ## Types
 
 This package is fully typed with [TypeScript][].
-It exports the additional type [`AssertionError`][assertionerror].
+It exports the additional type [`AssertionError`][api-assertion-error].
 
 ## Compatibility
 
-Projects maintained by the unified collective are compatible with all maintained
+Projects maintained by the unified collective are compatible with maintained
 versions of Node.js.
-As of now, that is Node.js 14.14+ and 16.0+.
-Our projects sometimes work with older versions, but this is not guaranteed.
+
+When we cut a new major release, we drop support for unmaintained versions of
+Node.
+This means we try to keep the current release line, `hast-util-assert@^3`,
+compatible with Node.js 12.
 
 ## Security
 
@@ -222,9 +228,9 @@ abide by its terms.
 
 [downloads]: https://www.npmjs.com/package/hast-util-assert
 
-[size-badge]: https://img.shields.io/bundlephobia/minzip/hast-util-assert.svg
+[size-badge]: https://img.shields.io/badge/dynamic/json?label=minzipped%20size&query=$.size.compressedSize&url=https://deno.bundlejs.com/?q=hast-util-assert
 
-[size]: https://bundlephobia.com/result?p=hast-util-assert
+[size]: https://bundlejs.com/?q=hast-util-assert
 
 [sponsors-badge]: https://opencollective.com/unified/sponsors/badge.svg
 
@@ -270,20 +276,20 @@ abide by its terms.
 
 [xss]: https://en.wikipedia.org/wiki/Cross-site_scripting
 
-[void]: #_voidnode-parent
-
-[assert]: #asserttree-parent
-
-[literal]: #literalnode-parent
-
-[parent]: #parenttree-parent
-
-[wrap]: #wrapfn
-
-[assertionerror]: #assertionerror
-
 [unist-util-assert-void]: https://github.com/syntax-tree/unist-util-assert#_voidnode-parent
 
 [unist-util-assert-wrap]: https://github.com/syntax-tree/unist-util-assert#wrapfn
 
-[unist-util-assert-assertionerror]: https://github.com/syntax-tree/unist-util-assert#assertionerror
+[unist-util-assert-assertion-error]: https://github.com/syntax-tree/unist-util-assert#assertionerror
+
+[api-void]: #_voidnode-parent
+
+[api-assert]: #asserttree-parent
+
+[api-literal]: #literalnode-parent
+
+[api-parent]: #parenttree-parent
+
+[api-wrap]: #wrapfn
+
+[api-assertion-error]: #assertionerror

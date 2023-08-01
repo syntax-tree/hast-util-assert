@@ -54,14 +54,14 @@ npm install hast-util-assert
 In Deno with [`esm.sh`][esmsh]:
 
 ```js
-import {assert} from 'https://esm.sh/hast-util-assert@3'
+import {assert} from 'https://esm.sh/hast-util-assert@4'
 ```
 
 In browsers with [`esm.sh`][esmsh]:
 
 ```html
 <script type="module">
-  import {assert} from 'https://esm.sh/hast-util-assert@3?bundle'
+  import {assert} from 'https://esm.sh/hast-util-assert@4?bundle'
 </script>
 ```
 

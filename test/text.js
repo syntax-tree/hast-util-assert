@@ -1,6 +1,6 @@
 import nodeAssert from 'node:assert/strict'
 import test from 'node:test'
-import {assert} from '../index.js'
+import {assert} from 'hast-util-assert'
 
 test('assert(text)', async function (t) {
   await t.test(

@@ -1,6 +1,6 @@
 import nodeAssert from 'node:assert/strict'
 import test from 'node:test'
-import {parent} from '../index.js'
+import {parent} from 'hast-util-assert'
 
 test('parent', async function (t) {
   await t.test('should throw if not given a node', async function () {
